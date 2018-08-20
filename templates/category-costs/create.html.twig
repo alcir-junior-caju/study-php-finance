@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Nova Categoria de Custo{% endblock %}
+
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <p class="panel-heading is-uppercase has-text-weight-bold has-text-white has-background-dark">{{ block('title') }}</p>
+            <div class="panel-block is-block has-background-white">
+                {% set action = route('category-costs.store') %}
+                {% set submitIcon = 'fa-save' %}
+                {% set submitLabel = 'Salvar' %}
+                {% include 'category-costs/_form.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+<form method="post" action="{{ action }}">
+    <div class="columns">
+        <div class="column is-3">
+            <div class="control has-icons-left is-expanded">
+                <div class="select is-large is-fullwidth is-black">
+                    <select name="category_cost_id" class="form-control" value="{{ bill.category_cost_id }}">
+                        <option value="" selected disabled hidden>Categoria</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {{ bill.category_cost_id is not null and bill.category_cost_id == category.id ? 'selected="selected"' : '' }}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <span class="icon is-large is-left">
+                    <i class="fas fa-chart-bar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="column is-2">
+            <div class="control has-icons-left">
+                <input class="input is-large is-black" type="text" name="date_launch" placeholder="Lançamento" value="{{ bill.date_launch | date('d/m/Y') }}">
+                <span class="icon is-medium is-left">
+                    <i class="fas fa-calendar-alt"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="column is-3">
+            <div class="control has-icons-left">
+                <input class="input is-large is-black" type="name" placeholder="Nome" value="{{ bill.name }}">
+                <span class="icon is-medium is-left">
+                    <i class="fas fa-money-bill-alt"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="column is-4">
+            <div class="field has-addons">
+                <div class="control has-icons-left">
+                    <input class="input is-large is-black" type="text" placeholder="Valor" name="value" value="{{ bill.value }}">
+                    <span class="icon is-medium is-left">
+                        <i class="fas fa-dollar-sign"></i>
+                    </span>
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-dark is-large">
+                        <span class="icon">
+                            <i class="fas {{ submitIcon }}"></i>
+                        </span>
+                        <span>{{ submitLabel }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

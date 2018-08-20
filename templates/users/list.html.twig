@@ -1,0 +1,50 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Administração de Usuários{% endblock %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <div class="is-pulled-right">
+                <a href="{{ route('users.new') }}" class="button is-dark is-large">
+                    <span class="icon is-large">
+                        <i class="fas fa-plus-square"></i>
+                    </span>
+                    <span>Novo Usuário</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <p class="panel-heading is-uppercase has-text-weight-bold has-text-white has-background-dark">{{ block('title') }}</p>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-size-5">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.first_name ~ ' ' ~ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a class="has-text-primary" href="{{ route('users.edit', { 'id': user.id }) }}">
+                                    <i class="fas fa-pen-square"></i>
+                                </a>
+                                    |
+                                <a class="has-text-danger" href="{{ route('users.show', { 'id': user.id }) }}">
+                                    <i class="fas fa-window-close"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

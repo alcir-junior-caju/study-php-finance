@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top has-background-light">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Finanças - {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    </head>
+    <body>
+        {% if Auth.check() %}
+            <nav class="navbar is-dark is-fixed-top">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">
+                       <span class="icon">
+                           <i class="fas fa-chart-pie"></i>
+                       </span>
+                       <span class="is-uppercase has-text-weight-bold">Finanças</span>
+                    </a>
+                    <div class="navbar-burger burger" data-target="navMenuColordark">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div id="navMenuColordark" class="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item" href="{{ route('category-costs.list') }}">Categoria de Custo</a>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link" href="#">Contas</a>
+                            <div class="navbar-dropdown is-boxed">
+                                <a class="navbar-item" href="{{ route('bill-pays.list') }}">Contas a pagar</a>
+                                <a class="navbar-item" href="{{ route('bill-receives.list') }}">Contas a receber</a>
+                            </div>
+                        </div>
+                        <a class="navbar-item" href="{{ route('statements.list') }}">Extrato</a>
+                        <a class="navbar-item" href="{{ route('charts.list') }}">Gráfico de Gastos</a>
+                        <a class="navbar-item" href="{{ route('users.list') }}">Usuário</a>
+                    </div>
+
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    Olá ({{ Auth.user().fullname }})
+                                </p>
+                                <p class="control">
+                                    <a  class="has-text-white" href="{{ route('auth.logout') }}">Sair</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        {% endif %}
+
+        <section class="section">
+            <div class="container is-fluid">
+                <nav class="panel">
+                    {% block content %}{% endblock %}
+                </nav>
+            </div>
+        </section>
+
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

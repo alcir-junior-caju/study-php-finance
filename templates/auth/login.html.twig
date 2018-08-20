@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <p class="panel-heading is-uppercase has-text-weight-bold has-text-white has-background-dark">{{ block('title') }}</p>
+            <div class="panel-block has-background-white">
+                <form action="{{ route('auth.login') }}" method="post">
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="control has-icons-left">
+                                <input class="input is-large is-dark" type="text" placeholder="E-mail" name="email">
+                                <span class="icon is-medium is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="field has-addons">
+                                <div class="control has-icons-left">
+                                    <input class="input is-large is-dark" type="password" placeholder="Senha" name="password">
+                                    <span class="icon is-medium is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </div>
+                                <div class="control">
+                                    <button type="submit" class="button is-dark is-large">
+                                        <span>Entrar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {# <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Login</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{ route('auth.login') }}" method="post">
+                        <div class="form-group">
+                            <label for="email" class="control-label">E-mail</label>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="E-mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">Senha</label>
+                            <input type="password" name="password" id="" class="form-control" placeholder="Senha">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> #}
+{% endblock %}

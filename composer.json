@@ -1,0 +1,29 @@
+{
+    "name": "caju/finance",
+    "description": "PHP Study Case - Finance Manager",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Alcir Junior Caju",
+            "email": "junior@cajucomunica.com.br"
+        }
+    ],
+    "require": {
+        "robmorgan/phinx": "^0.10.5",
+        "xtreamwayz/pimple-container-interop": "^1.0",
+        "aura/router": "^3.1",
+        "zendframework/zend-diactoros": "^1.8",
+        "twig/twig": "^2.0",
+        "illuminate/database": "^5.6",
+        "jasny/auth": "^1.0",
+        "vlucas/phpdotenv": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Caju\\Finance\\": "src"
+        }
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.8"
+    }
+}

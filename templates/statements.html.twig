@@ -1,0 +1,89 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Extrato{% endblock %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <p class="panel-heading is-uppercase has-text-weight-bold has-text-white has-background-dark">{{ block('title') }}</p>
+            <div class="panel-block is-block has-background-white">
+                <form method="get" action="{{ route('statements.list') }}" class="form-inline text-center">
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control is-expanded has-icons-left">
+                                    <input name="date_start" type="text" class="input is-large is-black" placeholder="Data Inicial (DD/MM/YYYY)" value="{{ 'now' | date_modify('-1 month') | date('d/m/Y') }}">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field has-addons">
+                                <div class="control is-expanded has-icons-left">
+                                    <input name="date_end" type="text" class="input is-large is-black" placeholder="Data Final (DD/MM/YYYY)" value="{{ 'now' | date('d/m/Y') }}">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <div class="control">
+                                    <button type="submit" class="button is-dark is-large">
+                                        <span class="icon">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                        <span>Filtrar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-block is-block has-background-white">
+                <h2>Totais no período</h2>
+                <p class="has-text-primary">
+                    <strong>Recebidos: </strong>
+                    R$ {{ statements.total_receives | number_format(2, ',', '.') }}
+                </p>
+                <p class="has-text-danger">
+                    <strong>Pagos: </strong>
+                    R$ {{ statements.total_pays | number_format(2, ',', '.') }}
+                </p>
+                <p class="has-text-info">
+                    <strong>Total: </strong>
+                    R$ {{ (statements.total_receives - statements.total_pays) | number_format(2, ',', '.') }}
+                </p>
+            </div>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-size-5">
+                <thead>
+                    <tr>
+                        <th>Entrada / Saída</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for statement in statements.statements %}
+                        {% set isBillPay = statement.category_name is not null %}
+                        <tr>
+                            <td>
+                                <i class="fas fa-{{ isBillPay ? 'minus' : 'plus' }}-square"></i>
+                                {{ statement.date_launch | date('d/m/Y') }} - {{ statement.name }}
+                            </td>
+                            <td>
+                                {% if isBillPay %}
+                                    <p>{{ statement.category_name }}</p>
+                                {% else %}
+                                    <p>Entrada</p>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="label {{ isBillPay ? 'has-text-danger' : 'has-text-primary' }}">
+                                    R$ {{ isBillPay ? '-' : '' }}{{ statement.value | number_format(2, ',', '.') }}
+                                </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

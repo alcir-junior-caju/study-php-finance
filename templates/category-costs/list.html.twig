@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Administração de categorias de custo{% endblock %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <div class="is-pulled-right">
+                <a href="{{ route('category-costs.new') }}" class="button is-dark is-large">
+                    <span class="icon is-large">
+                        <i class="fas fa-plus-square"></i>
+                    </span>
+                    <span>Nova Categoria</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <p class="panel-heading is-uppercase has-text-weight-bold has-text-white has-background-dark">{{ block('title') }}</p>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-size-5">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Categoria</th>
+                        <th>Acões</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.name }}</td>
+                            <td>
+                                <a class="has-text-primary" href="{{ route('category-costs.edit', { 'id': category.id }) }}">
+                                    <i class="fas fa-pen-square"></i>
+                                </a>
+                                    |
+                                <a class="has-text-danger" href="{{ route('category-costs.show', { 'id': category.id }) }}">
+                                    <i class="fas fa-window-close"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

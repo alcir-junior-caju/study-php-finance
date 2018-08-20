@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Editar Usuário{% endblock %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <p class="panel-heading is-uppercase has-text-weight-bold has-text-white has-background-dark">{{ block('title') }}</p>
+            <div class="panel-block is-block has-background-white">
+                {% set action = route('users.update', { 'id': user.id }) %}
+                {% set submitIcon = 'fa-pen-square' %}
+                {% set submitLabel = 'Editar' %}
+                {% include 'users/_form.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

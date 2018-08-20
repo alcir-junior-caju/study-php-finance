@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Usuário{% endblock %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <div class="is-pulled-right">
+                <a href="{{ route('users.edit', { 'id': user.id }) }}" class="button is-primary is-large">
+                    <span class="icon is-large">
+                        <i class="fas fa-pen-square"></i>
+                    </span>
+                    <span>Editar</span>
+                </a>
+                <a href="{{ route('users.delete', { 'id': user.id }) }}" class="button is-danger is-large">
+                    <span class="icon is-large">
+                        <i class="fas fa-window-close"></i>
+                    </span>
+                    <span>Excluir</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <p class="panel-heading is-uppercase has-text-weight-bold has-text-white has-background-dark">{{ block('title') }}</p>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-size-5">
+                <tbody>
+                    <tr>
+                        <th scope="row">#</th>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nome</th>
+                        <td>{{ user.first_name ~ ' ' ~ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
